@@ -2,7 +2,7 @@
   "name": "api-learning",
   "version": "1.0.0",
   "description": "learn how to make APIs in node.js",
-  "main": "app.js",
+  "main": "server.js",
   "start": "node server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
