@@ -2,12 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
+require('dotenv').config();
 
 const StudentController = require('./controllers/studentController');
 
 const tourController = require('./controllers/addTourController');
 
-mongoose.connect('mongodb+srv://ghulam:7Z9XL5H2izvoJyC3@cluster0.ektfh.mongodb.net/natures?retryWrites=true&w=majority', {
+mongoose.connect(`mongodb+srv://ghulam:${process.env.DB_PASSWORD}@cluster0.ektfh.mongodb.net/natures?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false
@@ -49,4 +50,4 @@ app
 	.delete(StudentController.deleteStudent)
 
 module.exports = app;
-// 7Z9XL5H2izvoJyC3
+// 

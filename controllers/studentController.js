@@ -49,20 +49,42 @@ exports.updateStudent = (req, res) => {
 
 	
 // get all student
-exports.getAllStudent = (req, res) => {
-	Student.find().then(
-		(value) => {
-			res.status(200).send({
-				status: "success",
-				data: value
-			})
-		}).catch(
-		(value) => {
-			res.status(401).send({
-				status: 'failed',
-				message: value.message
-			})
-		});
+exports.getAllStudent = async (req, res) => {
+	try {
+		console.log(req.query);
+		let queryStr = Student.find();
+		if(req.query.sort) {
+			queryStr = queryStr.sort(req.query.sort)
+		}
+		const students = await queryStr;
+		console.log(students);
+		res.status(200).send({
+			status: "success",
+			students
+		})
+	}catch(error) {
+		res.status(401).send({
+			status: 'failed',
+			message: error.message
+		})
+	}
+	
+
+
+	
+	// Student.find().then(
+	// 	(value) => {
+	// 		res.status(200).send({
+	// 			status: "success",
+	// 			data: value
+	// 		})
+	// 	}).catch(
+	// 	(value) => {
+	// 		res.status(401).send({
+	// 			status: 'failed',
+	// 			message: value.message
+	// 		})
+	// 	});
 }
 
 // delete a student
